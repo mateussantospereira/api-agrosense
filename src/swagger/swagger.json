@@ -1,0 +1,53 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api do Agrosense",
+        "description": "Esta API foi feita para o grupo do LMPP Agrosense.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/register/create": {
+            "post": {
+                "summary": "Registro de usuários",
+                "tags": ["Registro"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/register-create"
+                            },
+                            "examples": {
+                                "data": {
+                                    "value": {
+                                       "name": "Jõao Ninguém",
+                                       "email": "joaong@gmail.com",
+                                       "password": "12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "components": {
+        "schemas": {
+            "register-create": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
