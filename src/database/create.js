@@ -43,10 +43,13 @@ class createDatabase {
     async createTableTraps() {
         const sql = `
             CREATE TABLE IF NOT EXISTS traps (
-                id int not null auto_increment primary key,
-                email varchar(100) not null unique,
-                name varchar(100) not null,
-                password varchar(100) not null
+                id int not null primary key,
+                pragas int not null,
+                talhao int not null,
+                nde int not null,
+                umidade int not null,
+                temperatura int not null,
+                vento varchar(8) not null
             );
         `;
 

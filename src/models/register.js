@@ -12,7 +12,6 @@ class registerModel {
     } 
 
     async create(data) {
-        console.log(data)
         const sql = "INSERT INTO registers SET ?";
         return await executeQuery(sql, data);
     } 
