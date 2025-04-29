@@ -1,3 +1,4 @@
+const { promisify } = require("util");
 const jsonwebtoken = require("jsonwebtoken"); 
 
 class jwt {
@@ -9,6 +10,16 @@ class jwt {
         );
 
         return token;
+    }
+
+    async validate(token) {
+        try {
+            await promisify(jsonwebtoken.verify)(token, process.env.SECRET);
+            return true;
+        } catch (error) {
+            console.log(error)
+            return false;
+        }   
     }
 }
 

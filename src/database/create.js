@@ -6,6 +6,7 @@ class createDatabase {
     async init() {
         await this.database();
         await this.createTableRegisters();
+        await this.createTableTraps();
     }
 
     async database() {
@@ -37,6 +38,19 @@ class createDatabase {
         `;
 
         return this.createTable(sql, "registers")
+    }
+
+    async createTableTraps() {
+        const sql = `
+            CREATE TABLE IF NOT EXISTS traps (
+                id int not null auto_increment primary key,
+                email varchar(100) not null unique,
+                name varchar(100) not null,
+                password varchar(100) not null
+            );
+        `;
+
+        return this.createTable(sql, "traps")
     }
 
     async createTable(sql, name) {

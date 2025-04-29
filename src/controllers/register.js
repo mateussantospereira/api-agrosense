@@ -1,5 +1,6 @@
 const registerModel = require("../models/register");
 const jwt = require("../services/jwt");
+const bcrypt = require("../services/bcrypt");
 const response = require("../helpers/response");
 
 class registerController {
@@ -17,8 +18,10 @@ class registerController {
     async login(req, res) {
         const data = req.body;
         const user = await registerModel.get(data.email);
+        const validePassword = await bcrypt.compare(
+            data.password, user[0].password)
 
-        if (!user[0] || user[0].password != data.password) {
+        if (!user[0] || !validePassword) {
             return res.json("E-mail ou senha incorretos.");
         } 
 
@@ -28,7 +31,10 @@ class registerController {
     }
 
     async create(req, res) {
-        const user = await registerModel.create(req.body);
+        let data = req.body;
+        const password = await bcrypt.create(data.password);
+        data.password = password;
+        const user = await registerModel.create(data);
         return res.json(user);
     }
 
