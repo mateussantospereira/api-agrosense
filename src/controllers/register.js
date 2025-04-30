@@ -32,15 +32,13 @@ class registerController {
 
     async create(req, res) {
         let data = req.body;
-        const password = await bcrypt.create(data.password);
-        data.password = password;
+        data.password = await bcrypt.create(data.password);
         const user = await registerModel.create(data);
         return res.json(user);
     }
 
     async update(req, res) {
         const { email } = req.params;
-        console.log(email)
         const user = await registerModel.update(req.body, email);
         return res.json(user);
     }

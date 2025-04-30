@@ -1,4 +1,4 @@
-const trapModel = require("../models/register");
+const trapModel = require("../models/trap");
 const response = require("../helpers/response");
 
 class trapController {
